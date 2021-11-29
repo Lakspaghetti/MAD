@@ -35,10 +35,13 @@ class LinearRegression():
         ones = numpy.ones((X.shape[0], 1))
         X = numpy.concatenate((ones, X), axis=1)
 
+        #compute A
+        A = numpy.diag(t.T[0] ** 2) #
         # compute weights
-        a = numpy.dot(X.T,X) #X.T is X transposed
-        b = numpy.dot(X.T,t)
-        self.w = numpy.linalg.solve(a, b) 
+        a = numpy.dot(X.T, numpy.dot(A,X)) #left side
+        b = numpy.dot(X.T, numpy.dot(A,t)) #right side
+
+        self.w = numpy.linalg.solve(a, b)
         
         # (2) TODO: Make use of numpy.linalg.solve instead!
         # Reason: Inverting the matrix is not very stable

@@ -26,7 +26,7 @@ model_all.fit(X_train, t_train)
 #for-loop to make more readable output, simply type print(model_all.w) if the 
 #look of the output doesn't matter
 for i in range(len(model_all.w)): 
-    print("All model weight w%a: %a\n"% (i, model_all.w[i][0]))
+    print("All model weight w%a: %a"% (i, model_all.w[i][0]))
 
 # (d) evaluation of results
 def rmse(t, tp):
@@ -40,13 +40,15 @@ print("RMSE of all: %a"% rmse(t_test, model_all.predict(X_test)))
 
 print("RMSE of single: %a"% rmse(t_test, model_single.predict(X_test[:,0])))
 
-plt.subplot(212)
+plt.subplot()
 plt.title("2D scatter plot(\"true house prices\" vs. \"estimates\") - ALL")
+plt.plot([10,20,30,40,50],[10,20,30,40,50])
 plt.scatter(model_all.predict(X_test), t_test, color='cyan', label="All")
 plt.ylabel('true house prices')
 plt.legend(loc=2)
 plt.xlim(-18,45)
 plt.savefig("2DscatterPlotModelALL.png")
+
 
 plt.subplot(211)
 plt.title("2D scatter plot(\"true house prices\" vs. \"estimates\") - SINGLE")
