@@ -40,7 +40,7 @@ print("RMSE of all: %a"% rmse(t_test, model_all.predict(X_test)))
 
 print("RMSE of single: %a"% rmse(t_test, model_single.predict(X_test[:,0])))
 
-plt.subplot()
+plt.subplot(212)
 plt.title("2D scatter plot(\"true house prices\" vs. \"estimates\") - ALL")
 plt.plot([10,20,30,40,50],[10,20,30,40,50])
 plt.scatter(model_all.predict(X_test), t_test, color='cyan', label="All")

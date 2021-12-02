@@ -21,7 +21,7 @@ def GetBestLamb(x, t, k):
             result = lam[i]
             #print("lamInside = %.10f"% lam[i])
     return result
-"""
+
 print("lam = %a" % GetBestLamb(InputVar,FPRunTimes,1))
 regularised_model.fit(InputVar, FPRunTimes, GetBestLamb(InputVar,FPRunTimes,1), 1)
 print("w of best lam: %a"% regularised_model.w)    
@@ -31,28 +31,30 @@ print("w of lam 0: %a"% regularised_model.w)
 
 LOOCVList = np.array([regularised_model.LOOCV(InputVar, FPRunTimes, i, 1) for i in lam])
 
-plt.subplot()
+plt.subplot(211)
 plt.title("LOOCV first order")
 plt.scatter(lam,LOOCVList , color='cyan', label="error")
 plt.ylabel('LOOCV error')
 plt.xlabel("$\lambda$")
 plt.legend(loc=2)
+ax = plt.gca()
+ax.xaxis.set_visible(False)
 plt.xscale("log")
-plt.savefig("LOOCVofFirstOrder.png")
-"""
-#b
+#plt.savefig("LOOCVofFirstOrder.png")
 
-LOOCVList = np.array([regularised_model.LOOCV(InputVar, FPRunTimes, i, 4) for i in lam])
+#b
+fourth_model = linreg.LinearRegression()
+LOOCVList2 = np.array([fourth_model.LOOCV(InputVar, FPRunTimes, i, 4) for i in lam])
 
 print("lam = %a" % GetBestLamb(InputVar,FPRunTimes,4))
-regularised_model.fit(InputVar, FPRunTimes, GetBestLamb(InputVar,FPRunTimes,4), 4)
-print("w of best lam: %a"% regularised_model.w)    
-regularised_model.fit(InputVar, FPRunTimes, lam[0], 4)
-print("w of lam 0: %a"% regularised_model.w)  
+fourth_model.fit(InputVar, FPRunTimes, GetBestLamb(InputVar,FPRunTimes,4), 4)
+print("w of best lam: %a"% fourth_model.w)    
+fourth_model.fit(InputVar, FPRunTimes, lam[0], 4)
+print("w of lam 0: %a"% fourth_model.w)  
 
-plt.subplot()
+plt.subplot(212)
 plt.title("LOOCV fourth order")
-plt.scatter(lam,LOOCVList , color='cyan', label="error")
+plt.scatter(lam,LOOCVList2 , color='cyan', label="error")
 plt.ylabel('LOOCV error')
 plt.xlabel("$\lambda$")
 plt.legend(loc=2)

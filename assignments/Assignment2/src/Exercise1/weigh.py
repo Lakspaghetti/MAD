@@ -15,8 +15,6 @@ model_all.fit(X_train, t_train)
 for i in range(len(model_all.w)): 
     print("All model weight w%a: %a"% (i, model_all.w[i][0]))
 
-#for-loop to make more readable output, simply type print(model_all.w) if the 
-#look of the output doesn't matter
 def rmse(t, tp):
     error = t - tp
     square = error ** 2
