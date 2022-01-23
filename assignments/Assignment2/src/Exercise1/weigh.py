@@ -8,7 +8,8 @@ train_data = np.loadtxt("boston_train.csv", delimiter=",")
 test_data = np.loadtxt("boston_test.csv", delimiter=",")
 X_train, t_train = train_data[:,:-1], train_data[:,-1]
 X_test, t_test = test_data[:,:-1], test_data[:,-1]
-
+print(t_train)
+print(X_train)
 # fit linear regression model using all features
 model_all = linreg.LinearRegression()
 model_all.fit(X_train, t_train)
